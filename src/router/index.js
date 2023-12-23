@@ -41,6 +41,11 @@ const router = createRouter({
             name: "register",
             component: () => import("@/views/login/register.vue"),
         },
+        {
+            path: '/:catchAll(.*)',
+            component: () => import('@/views/404.vue'),
+            hidden: true
+          }
     ],
 });
 
