@@ -1,22 +1,70 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import NProgress from 'nprogress';
+import { useUserInfoStore } from "@/stores/userInfo";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      // component: HomeView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import('../views/AboutView.vue')
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: "/",
+            redirect: "/home",
+        },
+
+        {
+            // 主页
+            path: "/home",
+            name: "home",
+            component: () => import("@/views/home/home.vue"),
+            meta: {
+                title: '新闻发布首页',
+                noCache: true
+            }
+        },
+
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("@/views/login/login.vue"),
+            meta: {
+                title: '登录',
+                noCache: true
+            }
+        },
+
+        {
+            path: "/forget",
+            name: "forget",
+            // component: () => import("@views/login/forget.vue"),
+        },
+        {
+            path: "/register",
+            name: "register",
+            component: () => import("@/views/login/register.vue"),
+        },
+    ],
+});
+
+// 进度条
+NProgress.configure({ showSpinner: false });
+// 白名单
+const whiteList = ["/login"];
+
+router.beforeEach(async (to, from, next) => {
+    NProgress.start();
+    document.title  = to.meta.title;
+    const store = useUserInfoStore()
+    const userInfo = store.state.userInfo
+
+    // 没有登录信息, 不是白名单中的路由
+    if (!userInfo && whiteList.indexOf(to.path) === -1) {
+        next('/login')
+        NProgress.done()
     }
-  ]
+    next()
+});
+
+router.afterEach(() => {
+    NProgress.done()
 })
 
-export default router
+export default router;
