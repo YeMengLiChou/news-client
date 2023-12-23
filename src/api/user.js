@@ -1,7 +1,6 @@
 import { get, post } from "@/utils/request";
 
-/* 打了星号的表示已经测试过了 */ 
-
+/* 打了星号的表示已经测试过了 */
 
 export default {
     /**
@@ -79,15 +78,14 @@ export default {
         });
     },
 
-
     /**
      * 更新用户信息
-     * @param {string} userId 
-     * @param {string} account 
-     * @param {string} username 
-     * @param {string | undefined} avatarUrl 
-     * @param {string | number} phoneNumber 
-     * @returns 
+     * @param {string} userId
+     * @param {string} account
+     * @param {string} username
+     * @param {string | undefined} avatarUrl
+     * @param {string | number} phoneNumber
+     * @returns
      */
     updateUserInfo(userId, account, username, avatarUrl, phoneNumber) {
         return post("/user/update/userInfo", {
@@ -95,8 +93,7 @@ export default {
             account: account,
             username: username,
             avatarUrl: avatarUrl,
-            phoneNumber: phoneNumber
-        })
-    }
-
+            phoneNumber: phoneNumber,
+        });
+    },
 };

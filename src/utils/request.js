@@ -3,8 +3,8 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserInfoStore } from "@/stores/userInfo";
 import router from "@/router";
 import constants from "@/common/config";
-import Code from '@/common/constants'
-import msg from '@/utils/message'
+import Code from "@/common/constants";
+import msg from "@/utils/message";
 
 // 单例 axios 实例
 const service = axios.create({
@@ -18,7 +18,7 @@ service.interceptors.request.use(
         // 读取本地数据
         const userStore = useUserInfoStore();
         const token = userStore.$state.state.token;
-        console.log('request-interceptor-token', token);
+        console.log("request-interceptor-token", token);
         // 在请求头中加入该 token
         if (token) {
             config.headers["satoken"] = token;
@@ -33,7 +33,7 @@ service.interceptors.request.use(
 );
 
 // 响应拦截器
-service.interceptors.response.use (
+service.interceptors.response.use(
     (response) => {
         // 文件下载
         if (response.config.responseType === "blob") {
@@ -44,7 +44,7 @@ service.interceptors.response.use (
 
         // 响应码不是 200
         if (res.code !== 200) {
-            const store = useUserInfoStore()
+            const store = useUserInfoStore();
             // 自定义请求码， 需要动态刷新token
             if (
                 res.code === Code.INVALID_TOKEN ||
@@ -78,37 +78,57 @@ service.interceptors.response.use (
     },
     (error) => {
         console.log("err" + error); // for debug
-        msg.error(error.message, 5000)
+        msg.error(error.message, 5000);
         return Promise.reject(error);
     }
 );
 
-
 /**
  * get方法请求
- * @param {string} url 
- * @param {object} data 
- * @returns 
+ * @param {string} url
+ * @param {object} data
+ * @returns
  */
 export function post(url, data) {
     return service({
-        url: url,
-        data: data,
-        method: 'post'
+        url,
+        data,
+        method: "post",
     });
 }
 
 /**
  * post方法请求
- * @param {string} url 
- * @param {object} data 
- * @returns 
+ * @param {string} url
+ * @param {object} data
+ * @returns
  */
 export function get(url, data) {
     return service({
-        url: url,
-        data: data,
-        method: 'get'
-    })
-};
+        url,
+        data,
+        method: "get",
+    });
+}
 
+/**
+ * delete方法请求
+ * @param {string} url
+ * @param {object} data
+ * @returns
+ */
+export function del(url, data) {
+    return service({
+        url,
+        data,
+        method: "delete",
+    });
+}
+
+export function put(url, data) {
+    return service({
+        url,
+        data,
+        method: "put",
+    });
+}
