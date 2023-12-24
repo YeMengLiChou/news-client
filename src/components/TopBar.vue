@@ -1,142 +1,144 @@
 <template>
-    <el-row>
-        <el-col :span="4"
-                class="logo_container">
-            <div>
-                <el-icon :size="48">
-                    <Sunny />
-                </el-icon>
-                <el-text>
-                    新闻发布系统
-                </el-text>
-            </div>
-        </el-col>
-        <el-col :span="16"
-                class="center-col">
-            <el-autocomplete class="search_input"
-                             placeholder="搜索新闻关键词、标题、发布人等"
-                             clearable
-                             :fetch-suggestions="querySearchNews"
-                             :trigger-on-focus="false"
-                             :prefix-icon="Search"
-                             v-model="searchContent"
-                             @select="handleSelect"
-                             :debounce="1000"
-                             size="large">
-                <template #default="{ item }">
-                    <div>
-                        <div class="search-suggestion-item">
-                            <el-text size="large"
-                                     style="font-size: 16px; font-weight: bold">
-                                {{ item.title }}
-                            </el-text> 
-                            <el-text>
-                                {{ item.time }}
+    <div class="container" :style="{'padding': padding}">
+        <el-row>
+            <el-col :span="4"
+                    class="logo_container">
+                <div>
+                    <el-icon :size="48">
+                        <Sunny />
+                    </el-icon>
+                    <el-text>
+                        新闻发布系统
+                    </el-text>
+                </div>
+            </el-col>
+            <el-col :span="16"
+                    class="center-col">
+                <el-autocomplete class="search_input"
+                                 placeholder="搜索新闻关键词、标题、发布人等"
+                                 clearable
+                                 :fetch-suggestions="querySearchNews"
+                                 :trigger-on-focus="false"
+                                 :prefix-icon="Search"
+                                 v-model="searchContent"
+                                 @select="handleSelect"
+                                 :debounce="1000"
+                                 size="large">
+                    <template #default="{ item }">
+                        <div>
+                            <div class="search-suggestion-item">
+                                <el-text size="large"
+                                         style="font-size: 16px; font-weight: bold">
+                                    {{ item.title }}
+                                </el-text>
+                                <el-text>
+                                    {{ item.time }}
+                                </el-text>
+                            </div>
+                            <el-text style="width: 50vw"
+                                     truncated>
+                                {{ item.content }}
                             </el-text>
                         </div>
-                        <el-text style="width: 50vw"
-                                 truncated>
-                            {{ item.content }}
-                        </el-text>
-                    </div>
-                </template>
-            </el-autocomplete>
-        </el-col>
-
-        <el-col :span="4"
-                class="right-col">
-            <div class="avatar">
-                <el-dropdown @visible-change="handleAvatarHover"
-                             :placement="userFloatPlacement">
-                    <el-avatar :class="{ 'avatar-hover': avatarHover }"
-                               :src="avatarUrl"
-                               size="large">
-                        <el-text>未登录</el-text>
-                    </el-avatar>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <UserFloat />
-                        </el-dropdown-menu>
                     </template>
-                </el-dropdown>
-            </div>
-            <div class="notification">
-                <el-badge :is-dot="hasUnreadMessage">
-                    <el-dropdown size="large"
-                                 :disabled="!isLogin">
-                        <el-text size="large">消息</el-text>
+                </el-autocomplete>
+            </el-col>
+
+            <el-col :span="4"
+                    class="right-col">
+                <div class="avatar">
+                    <el-dropdown @visible-change="handleAvatarHover"
+                                 :placement="userFloatPlacement">
+                        <el-avatar :class="{ 'avatar-hover': avatarHover }"
+                                   :src="avatarUrl"
+                                   size="large">
+                            <el-text>未登录</el-text>
+                        </el-avatar>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item>
-                                    <el-badge :is-dot="hasUnreadMessage">
-                                        <el-text @click="navigate('')">
-                                            评论
-                                        </el-text>
-                                    </el-badge>
-                                </el-dropdown-item>
-                                <el-dropdown-item>
-                                    <el-badge :is-dot="hasUnreadMessage">
-                                        <el-text @click="navigate('')">
-                                            通知
-                                        </el-text>
-                                    </el-badge>
-                                </el-dropdown-item>
-                                <el-dropdown-item>
-                                    <el-badge :is-dot="hasUnreadMessage">
-                                        <el-text @click="navigate('')">
-                                            系统评论
-                                        </el-text>
-                                    </el-badge>
-                                </el-dropdown-item>
+                                <UserFloat />
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                </el-badge>
+                </div>
+                <div class="notification">
+                    <el-badge :is-dot="hasUnreadMessage">
+                        <el-dropdown size="large"
+                                     :disabled="!isLogin">
+                            <el-text size="large">消息</el-text>
+                            <template #dropdown>
+                                <el-dropdown-menu>
+                                    <el-dropdown-item>
+                                        <el-badge :is-dot="hasUnreadMessage">
+                                            <el-text @click="navigate('')">
+                                                评论
+                                            </el-text>
+                                        </el-badge>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item>
+                                        <el-badge :is-dot="hasUnreadMessage">
+                                            <el-text @click="navigate('')">
+                                                通知
+                                            </el-text>
+                                        </el-badge>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item>
+                                        <el-badge :is-dot="hasUnreadMessage">
+                                            <el-text @click="navigate('')">
+                                                系统评论
+                                            </el-text>
+                                        </el-badge>
+                                    </el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </el-badge>
 
-            </div>
+                </div>
 
-            <template v-if="isPublisher">
-                <el-button type="primary"
-                           round
-                           @click="navigate('')">
-                    <el-icon size="20"
-                             style="color: #fff">
-                        <CirclePlus />
-                    </el-icon>
-                    <el-text style="color: #fff;">发布新闻</el-text>
-                </el-button>
-            </template>
-            <template v-else-if="isLogin">
-                <el-button type="primary"
-                           round
-                           @click="navigate('')">
-                    <el-icon size="20"
-                             style="color: #fff">
-                        <MessageBox />
-                    </el-icon>
-                    <el-text style="color: #fff;">申请发布者</el-text>
-                </el-button>
-            </template>
-            <template v-else>
-                <!-- 未登录不显示 -->
-            </template>
+                <template v-if="isPublisher">
+                    <el-button type="primary"
+                               round
+                               @click="navigate('')">
+                        <el-icon size="20"
+                                 style="color: #fff">
+                            <CirclePlus />
+                        </el-icon>
+                        <el-text style="color: #fff;">发布新闻</el-text>
+                    </el-button>
+                </template>
+                <template v-else-if="isLogin">
+                    <el-button type="primary"
+                               round
+                               @click="navigate('')">
+                        <el-icon size="20"
+                                 style="color: #fff">
+                            <MessageBox />
+                        </el-icon>
+                        <el-text style="color: #fff;">申请发布者</el-text>
+                    </el-button>
+                </template>
+                <template v-else>
+                    <!-- 未登录不显示 -->
+                </template>
 
-        </el-col>
-    </el-row>
-    <el-row>
-        <el-tabs v-loading="tabsLoading"
-                 @tab-click="tabsChange">
-            <template v-for="item in tabItems">
-                <el-tab-pane :label="item.name" />
-            </template>
-        </el-tabs>
-    </el-row>
+            </el-col>
+        </el-row>
+        <el-row v-show="props.showTabs">
+            <el-tabs v-loading="tabsLoading"
+                     @tab-click="tabsChange">
+                <template v-for="item in tabItems">
+                    <el-tab-pane :label="item.name" />
+                </template>
+            </el-tabs>
+        </el-row>
+    </div>
 </template>
 
 <script setup>
 // icon
 import { Search, Sunny } from "@element-plus/icons-vue";
-import { ref, watch, onMounted, defineEmits, computed } from "vue";
+import { ref, watch, onMounted, defineEmits, computed, defineProps } from "vue";
 import sectionApi from '@/api/section';
 import { useRouter } from 'vue-router';
 import { useUserInfoStore } from "@/stores/userInfo";
@@ -148,6 +150,13 @@ import newsApi from '@/api/news'
 const emit = defineEmits([
     'tab-change' // tab栏发生改变回调事件, 回调数据 {preIndex, curIndex, name}
 ])
+
+const props = defineProps({
+    showTabs: {
+        type: Boolean,
+        default: () => false
+    }
+})
 
 const router = useRouter()
 const store = useUserInfoStore()
@@ -180,6 +189,11 @@ const isPublisher = computed(() => {
 // 是否登陆
 const isLogin = computed(() => {
     return store.state.userInfo && store.state.userInfo !== null
+})
+
+const padding = computed(() => {
+    if (props.showTabs) return '16px 16px 0 16px';
+    else return '16px'
 })
 
 const userFloatPlacement = computed(() => {
@@ -316,6 +330,12 @@ const navigate = (name) => {
 </script>
 
 <style lang="css" scoped>
+.container {
+    z-index: 10;
+    box-shadow: 0 2px 4px 0 #e0e0e0;
+    width: 100%;
+}
+
 /* 第一行 */
 .el-row:first-child {
     align-items: center;
@@ -338,7 +358,6 @@ const navigate = (name) => {
 .el-row:last-child {
     height: 48px;
     justify-content: center;
-    box-shadow: 0 1px #f0f0f0;
 }
 
 .el-col {
@@ -456,6 +475,4 @@ const navigate = (name) => {
     transition: 0.5s;
     transform: scale(1.2);
 }
-
-
 </style>

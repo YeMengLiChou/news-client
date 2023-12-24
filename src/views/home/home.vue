@@ -2,9 +2,7 @@
     <div class="container">
         <el-container>
             <el-header height="fix-content">
-                <slot >
-                    <TopBar />
-                </slot>
+                    <TopBar show-tabs />
             </el-header>
             <el-main>
                 
@@ -29,6 +27,7 @@ import TopBar from '@/components/TopBar.vue';
 
 .el-header {
     width: 100%;
+    padding: 0;
 }
 
 .el-main {
