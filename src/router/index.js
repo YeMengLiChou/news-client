@@ -16,7 +16,7 @@ const router = createRouter({
             name: "home",
             component: () => import("@/views/home/home.vue"),
             meta: {
-                title: '新闻发布首页',
+                title: '首页',
                 noCache: true
             }
         },
@@ -34,12 +34,20 @@ const router = createRouter({
         {
             path: "/forget",
             name: "forget",
-            // component: () => import("@views/login/forget.vue"),
+            component: () => import("@/views/login/forget.vue"),
+            meta: {
+                title: '找回密码',
+                noCache: true
+            }
         },
         {
             path: "/register",
             name: "register",
             component: () => import("@/views/login/register.vue"),
+            meta: {
+                title: '注册',
+                noCache: true
+            }
         },
         {
             path: '/:catchAll(.*)',
