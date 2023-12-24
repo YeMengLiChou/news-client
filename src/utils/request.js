@@ -3,7 +3,7 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserInfoStore } from "@/stores/userInfo";
 import router from "@/router";
 import constants from "@/common/config";
-import Code from "@/common/constants";
+import {Code} from "@/common/constants";
 import msg from "@/utils/message";
 
 // 单例 axios 实例
@@ -18,10 +18,9 @@ service.interceptors.request.use(
         // 读取本地数据
         const userStore = useUserInfoStore();
         const token = userStore.$state.state.token;
-        console.log("request-interceptor-token", token);
         // 在请求头中加入该 token
         if (token) {
-            config.headers["satoken"] = token;
+            config.headers["token"] = token;
         }
         return config;
     },
@@ -103,10 +102,10 @@ export function post(url, data) {
  * @param {object} data
  * @returns
  */
-export function get(url, data) {
+export function get(url, params) {
     return service({
         url,
-        data,
+        params,
         method: "get",
     });
 }

@@ -13,13 +13,24 @@ function error(message, duration) {
     });
 }
 
+function info(message, duration) {
+    if (!duration) {
+        duration = defaultDuration
+    }
+    ElMessage({
+        message: message,
+        type: 'info',
+        duration: duration
+    });
+}
+
 function warn(message, duration) {
     if (!duration) {
         duration = defaultDuration
     }
     ElMessage({
         message: message,
-        type: 'warn',
+        type: 'warning',
         duration: duration
     });
 }
@@ -30,7 +41,7 @@ function success(message, duration) {
     }
     ElMessage({
         message: message,
-        type: 'warn',
+        type: 'success',
         duration: duration
     });
 }

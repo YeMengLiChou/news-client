@@ -60,7 +60,7 @@ const router = createRouter({
 // 进度条
 NProgress.configure({ showSpinner: false });
 // 白名单
-const whiteList = ["/login"];
+const whiteList = ["/login", "/home"];
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start();

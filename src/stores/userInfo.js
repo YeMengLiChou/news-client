@@ -93,7 +93,7 @@ export const useUserInfoStore = defineStore("userInfo", () => {
             clearState()
             clearCookies()
             // 跳转到登录界面
-            router.replace('/login')
+            // router.replace('/login')
         } catch (error) {
             console.log(error)
         }
@@ -112,9 +112,9 @@ export const useUserInfoStore = defineStore("userInfo", () => {
                 // data字段存在为登录成功
                 if (data !== null && typeof(data) === "object") {
                     console.log('userInfo/login-setCookies', data);
-                    auth.setUserInfo(data.user);
-                    auth.setToken(data.token);
-                    auth.setRoles(data.roles);
+                    setUserInfo(data.user);
+                    setToken(data.token);
+                    setRoles(data.roles);
                     resolve()
                 } else {
                     msg.error('账号或密码错误!')

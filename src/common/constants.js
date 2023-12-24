@@ -1,7 +1,7 @@
 /**
  * 响应码
  */
-const Code = {
+export const Code = {
     /** 无 token */
     NOT_TOKEN: -1,
     /** 无效 token */
@@ -16,10 +16,22 @@ const Code = {
     NOT_LOGIN: 2001,
 };
 
+export const Role = {
+    /** 普通用户 */
+    USER: 1,
+    /** 新闻编辑器 */
+    PUBLISHER: 2,
+    /** 管理员 */
+    ADMIN: 3,
+    /**超级管理员 */
+    SUPER_ADMIN: 4
+}
+
+
 /**
  * 新闻状态
  */
-const NewsStatus = {
+export const NewsStatus = {
     NOT_PUBLISH: 1,
     PUBLISHED: 2,
     CANCEL_PUBLISH: 3,
@@ -29,14 +41,9 @@ const NewsStatus = {
 /**
  * 新闻编辑申请状态
  */
-const ApplicationStatus = {
+export const ApplicationStatus = {
     NOT_PASS: 1,
     PASSED: 2,
     REFUSED: 3,
     DELETED: 4
 }
-
-export default {
-    Code,
-    NewsStatus,
-};
