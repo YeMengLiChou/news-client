@@ -1,5 +1,10 @@
 <template>
-    <el-row class="container" :gutter="1" >
+    <el-container >
+        <el-header height="fix-content">
+            <TopBar />
+        </el-header>
+        <el-main>
+            <el-row class="container" :gutter="1" >
         <el-col :span="4" class="menu-col --el-box-shadow-light">
             <h2>个人中心</h2>
             <el-menu default-active="1">
@@ -31,6 +36,9 @@
 
         </el-col>
     </el-row>
+        </el-main>
+    </el-container>
+    
 </template>
 
 <script setup>
@@ -38,7 +46,7 @@
 </script>
 
 <style lang="css" scoped>
-.container {
+.el-container {
     background-color: #fff;
     height: 100%;
     width: 100%;
