@@ -49,11 +49,6 @@
                         忘记密码
                     </router-link>
                 </div>
-                <!-- <button id="login_button"
-                        type="submit"
-                        @click="submitLogin">
-                    登录
-                </button> -->
                 <el-form-item>
                     <el-button @click.native.prevent="submitLogin"
                                type="primary"
@@ -62,9 +57,6 @@
                                size="large">登录</el-button>
                 </el-form-item>
             </el-form>
-            <div class="bottom_bar">
-                <span>第三方登录</span>
-            </div>
         </div>
 
 
@@ -138,7 +130,7 @@ const submitLogin = () => {
     if (!formRef) return
     formRef.value.validate((valid) => {
         // 表单数据验证通过
-        if (valid) { 
+        if (valid) {
             loginStatus.value = true
             const { account, password } = loginForm
             userInfoStore

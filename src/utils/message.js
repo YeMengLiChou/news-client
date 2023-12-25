@@ -50,4 +50,5 @@ export default {
     success,
     warn,
     error,
+    info
 };

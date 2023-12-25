@@ -52,17 +52,52 @@ const router = createRouter({
         {
             path: "/user",
             name: 'user',
-            redirect: '/user/center',
+            component: () => import("@/views/user/UserCenter.vue"),
+            meta: {
+                title: '用户中心',
+            },
             children: [
                 {
-                    path: '/user/center',
-                    name: 'user-center',
-                    component: () => import("@/views/user/UserCenter.vue"),
+                    path: 'info',
+                    name: 'user-info',
+                    component: () => import("@/views/user/UserInfo.vue"),
                     meta: {
-                        title: '用户中心',
-                        noCache: true
+                        title: '基本信息'
                     }
-                }
+                },
+                {
+                    path: 'notification',
+                    name: 'user-notification',
+                    component: () => import("@/views/user/UserInfo.vue"),
+                    meta: {
+                        title: '消息管理'
+                    }
+                },
+                {
+                    path: 'follow',
+                    name: 'user-follow',
+                    component: () => import("@/views/user/UserInfo.vue"),
+                    meta: {
+                        title: '关注列表'
+                    }
+                },
+                {
+                    path: 'fans',
+                    name: 'user-fans',
+                    component: () => import("@/views/user/UserInfo.vue"),
+                    meta: {
+                        title: '粉丝列表'
+                    }
+                },
+                {
+                    path: 'content',
+                    name: 'user-content',
+                    component: () => import("@/views/user/UserInfo.vue"),
+                    meta: {
+                        title: '内容管理'
+                    }
+                },
+        
             ]
         },
 

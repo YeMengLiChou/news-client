@@ -16,17 +16,17 @@
                 </div>
                 <el-divider />
                 <div class="fans-focus">
-                    <div>
+                    <div @click="navigateTo('user-fans')">
                         <el-text class="fans">{{ followCount }}</el-text>
                         <el-text>粉丝</el-text>
                     </div>
-                    <div>
+                    <div @click="navigateTo('user-follow')">
                         <el-text class="focus">{{ focusCount }}</el-text>
                         <el-text>关注</el-text>
                     </div>
                 </div>
                 <el-divider />
-                <div class="action-item">
+                <div class="action-item" @click="navigateTo('user-info')">
                     <div><el-icon :size="iconSize">
                             <User />
                         </el-icon>
@@ -40,7 +40,7 @@
                 </div>
                 <!-- 判断角色是不是新闻发布者 -->
                 <div class="action-item"
-                     v-if="isPublisher">
+                     v-if="isPublisher" @click="navigateTo('user-content')">
                     <div>
                         <el-icon :size="iconSize">
                             <MessageBox />
@@ -65,8 +65,8 @@
                     </el-icon>
                 </div>
                 <el-divider />
-                <div class="action-item">
-                    <div @click="logout">
+                <div class="action-item" @click="logout">
+                    <div >
                         <el-icon :size="iconSize">
                             <SwitchButton />
                         </el-icon>
@@ -75,7 +75,6 @@
                     <el-icon :size="16">
                         <ArrowRight />
                     </el-icon>
-
                 </div>
             </div>
 
@@ -211,7 +210,9 @@ const fetchFocusCount = () => {
 
 // 导航到指定页面
 const navigateTo = (name) => {
-    router.push(name)
+    router.push({
+        name
+    })
 }
 
 // 登出

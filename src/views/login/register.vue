@@ -94,11 +94,7 @@
                         登录
                     </router-link>
                 </div>
-                <!-- <button id="login_button"
-                        type="submit"
-                        @click="submitLogin">
-                    登录
-                </button> -->
+                
                 <el-form-item>
                     <el-button @click.native.prevent="submitRegister"
                                type="primary"
@@ -107,9 +103,6 @@
                                size="large">注册</el-button>
                 </el-form-item>
             </el-form>
-            <div class="bottom_bar">
-                <span>第三方注册</span>
-            </div>
         </div>
     </div>
 </template>
@@ -191,6 +184,9 @@ const checkTelephone = (rule, value, callback) => {
     }
     if (value.length !== 11) {
         return callback(new Error('手机号的长度必须为11位'))
+    }
+    if (!/^\d+$/.test(value)) {
+        return callback(new Error('请输入正确的手机号!'))
     }
     callback()
 }
