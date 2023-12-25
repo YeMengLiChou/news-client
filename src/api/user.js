@@ -43,13 +43,13 @@ export default {
     },
 
     /**
-     * 通过用户id查找用户信息
+     * 通过用户id查找用户信息(*)
      * @param {string} userId
      * @returns
      */
     getUserInfoById(userId) {
         return get("/user/get/userInfo", {
-            userId: userId,
+            id: userId,
         });
     },
 
@@ -88,12 +88,12 @@ export default {
      * @returns
      */
     updateUserInfo(userId, account, username, avatarUrl, phoneNumber) {
-        return post("/user/update/userInfo", {
-            userId: userId,
-            account: account,
-            username: username,
-            avatarUrl: avatarUrl,
-            phoneNumber: phoneNumber,
-        });
+        let data = {
+            userId, account, username, phoneNumber
+        }
+        if (avatarUrl) {
+            data.avatarUrl = avatarUrl
+        }
+        return post("/user/update/userInfo", avatarUrl);
     },
 };
