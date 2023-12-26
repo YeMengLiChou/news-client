@@ -68,7 +68,7 @@ const router = createRouter({
                 {
                     path: 'notification',
                     name: 'user-notification',
-                    component: () => import("@/views/user/UserInfo.vue"),
+                    component: () => import("@/views/user/Notification.vue"),
                     meta: {
                         title: '消息管理'
                     }

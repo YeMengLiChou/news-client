@@ -53,7 +53,7 @@
                         <ArrowRight />
                     </el-icon>
                 </div>
-                <div class="action-item">
+                <div class="action-item" >
                     <div>
                         <el-icon :size="iconSize">
                             <Timer />

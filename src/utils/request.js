@@ -22,6 +22,8 @@ service.interceptors.request.use(
         if (token) {
             config.headers["token"] = token;
         }
+        // debug
+        console.log(config.url, config.params, config.data)
         return config;
     },
     (error) => {
@@ -39,7 +41,8 @@ service.interceptors.response.use(
             return response;
         }
         const res = response.data;
-        console.log(res);
+        // debug
+        console.log(response.config.url, response.statusCode, response.data);
 
         // 响应码不是 200
         if (res.code !== 200) {
@@ -131,3 +134,32 @@ export function put(url, data) {
         method: "put",
     });
 }
+
+/**
+ * 路径参数的delete方法请求
+ * @param {*} url 
+ * @param {*} data 
+ * @returns 
+ */
+export function delParam(url, data) {
+    return service({
+        url, 
+        params: data,
+        method: 'delete'
+    })
+}
+
+/**
+ * 路径参数的put方法请求
+ * @param {*} url 
+ * @param {*} data 
+ * @returns 
+ */
+export function putParam(url, data) {
+    return service({
+        url, 
+        params: data,
+        method: 'put'
+    })
+}
+
