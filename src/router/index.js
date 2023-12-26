@@ -76,7 +76,7 @@ const router = createRouter({
                 {
                     path: 'follow',
                     name: 'user-follow',
-                    component: () => import("@/views/user/UserInfo.vue"),
+                    component: () => import("@/views/user/UserFollow.vue"),
                     meta: {
                         title: '关注列表'
                     }
@@ -84,7 +84,7 @@ const router = createRouter({
                 {
                     path: 'fans',
                     name: 'user-fans',
-                    component: () => import("@/views/user/UserInfo.vue"),
+                    component: () => import("@/views/user/UserFans.vue"),
                     meta: {
                         title: '粉丝列表'
                     }
@@ -92,7 +92,7 @@ const router = createRouter({
                 {
                     path: 'content',
                     name: 'user-content',
-                    component: () => import("@/views/user/UserInfo.vue"),
+                    component: () => import("@/views/user/ContentManagement.vue"),
                     meta: {
                         title: '内容管理'
                     }

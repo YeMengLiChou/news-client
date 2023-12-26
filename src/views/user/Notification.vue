@@ -9,7 +9,7 @@
                              :throttle="500">
                     <template #default>
                         <div v-loading="updateLoading" v-if="unreadNotifications.length > 0">
-                            <el-scrollbar height="80%">
+                            <el-scrollbar height="100%">
                                 <el-card class="card-item"
                                          v-for="item in unreadNotifications"
                                          shadow="hover"
@@ -48,7 +48,7 @@
                              :throttle="500">
                     <template #default>
                         <div v-loading="updateLoading">
-                            <el-scrollbar height="80%"
+                            <el-scrollbar height="100%"
                                           v-if="readNotifications.length > 0">
                                 <el-card class="card-item"
                                          v-for="item in readNotifications"
