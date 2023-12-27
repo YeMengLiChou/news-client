@@ -66,7 +66,7 @@ export default {
      * @returns
      */
     getNewsById(newsId, userId) {
-        return get("/news/get/by-id", {
+        return post("/news/get/by-id", {
             newsId,
             userId,
         });
@@ -80,10 +80,10 @@ export default {
      * @returns
      */
     getNewsByPublisher(publisherId, page, size) {
-        return get("/news/get/by-publisher", {
+        return post("/news/get/by-publisher", {
             page,
             size,
-            id: publisherId,
+            param: publisherId,
         });
     },
 
@@ -95,7 +95,7 @@ export default {
      * @returns 
      */
     getNewsBySectionId(sectionId, page, size) {
-        return get("/news/get/by-section", {
+        return post("/news/get/by-section", {
             page,
             size,
             id: sectionId
@@ -109,7 +109,7 @@ export default {
      * @param {number} status 
      */
     getNewsByPublishStatus(page, size, status) {
-        return get('/news/get/by-status', {
+        return post('/news/get/by-status', {
             page,
             size,
             status
@@ -124,7 +124,7 @@ export default {
      * @returns 
      */
     searchNews(key, page, size) {
-        return get('/news/search', {
+        return post('/news/search', {
             key, page, size
         })
     },
