@@ -84,7 +84,7 @@ export default {
      */
     queryFocusedUserList(userId) {
         return get('/user/focus', {
-            userId
+            userId: userId
         })
     },
 

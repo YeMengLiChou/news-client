@@ -89,72 +89,76 @@ export default {
 
     /**
      * 根据栏目id获取新闻
-     * @param {string} sectionId 
-     * @param {number} page 
-     * @param {number} size 
-     * @returns 
+     * @param {string} sectionId
+     * @param {number} page
+     * @param {number} size
+     * @returns
      */
     getNewsBySectionId(sectionId, page, size) {
         return post("/news/get/by-section", {
             page,
             size,
-            id: sectionId
-        })
+            id: sectionId,
+        });
     },
 
     /**
      * 根据新闻状态获取新闻
-     * @param {number} page 
-     * @param {number} size 
-     * @param {number} status 
+     * @param {number} page
+     * @param {number} size
+     * @param {number} status
      */
     getNewsByPublishStatus(page, size, status) {
-        return post('/news/get/by-status', {
+
+        return post("/news/get/by-status", {
             page,
             size,
-            status
-        })
+            status,
+        });
     },
 
     /**
      * 模糊查询新闻
-     * @param {string} key 
-     * @param {number} page 
-     * @param {number} size 
-     * @returns 
+     * @param {T} param
+     * @param {number} page
+     * @param {number} size
+     * @returns
      */
-    searchNews(key, page, size) {
-        return post('/news/search', {
-            key, page, size
-        })
+
+    searchNews(param, page, size) {
+        return post("/news/search", {
+            param,
+            page,
+            size,
+        });
     },
 
     /**
      * 获取热门新闻列表
-     * @param {string | number} sectionId 非必须参数,如果不传则在所有所有新闻中选择最热门的，用于在首页展示 
+     * @param {string | number} sectionId 非必须参数,如果不传则在所有所有新闻中选择最热门的，用于在首页展示
      * @param {number} num 返回数量，默认为10
-     * @returns 
+     * @returns
      */
-    getHotNews(sectionId=undefined, num=10) {
-        let data = { num }
+    getHotNews(sectionId = undefined, num = 10) {
+        let data = { num };
         if (sectionId) {
-            data.sectionId = sectionId
+            data.sectionId = sectionId;
         }
-        return get('/news/hot', data);
+        return get("/news/hot", data);
     },
 
     /**
      * 获取大图新闻列表
      * @param {string | number} sectionId 非必须参数，如果不传入就代表主页中要展示的顶部大图片，传入就是对应栏目顶部的大图片
      * @param {number} num 返回数量，默认为5
-     * @returns 
+     * @returns
      */
-    getHomePictureNews(sectionId=undefined, num=5) {
-        let data = { num }
+    getHomePictureNews(sectionId = undefined, num = 5) {
+        let data = { num };
         if (sectionId) {
-            data.sectionId = sectionId
+            data.sectionId = sectionId;
         }
-        return get('/news/picturenews', data);
+        return get("/news/picturenews", data);
     },
 
     /**
@@ -162,11 +166,11 @@ export default {
      * @param {string | number} sectionId 非必须参数，不传入就默认在所有新闻中获取
      * @param {number} num 非必须参数一次要查询的新闻数量，默认5条
      */
-    getNewsSummary(sectionId, num=5) {
-        let data = {num}
+    getNewsSummary(sectionId, num = 5) {
+        let data = { num };
         if (sectionId) {
-            data.sectionId = sectionId
+            data.sectionId = sectionId;
         }
-        return get('/news/summary', data)
-    }
+        return get("/news/summary", data);
+    },
 };

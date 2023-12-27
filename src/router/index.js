@@ -60,6 +60,22 @@ const router = createRouter({
             component:() => import("@/views/news/apitest.vue")
         },
         {
+            path: "/user",
+            name: 'user',
+            redirect: '/user/center',
+            children: [
+                {
+                    path: '/user/center',
+                    name: 'user-center',
+                    component: () => import("@/views/user/UserCenter.vue"),
+                    meta: {
+                        title: '用户中心',
+                        noCache: true
+                    }
+                }
+            ]
+        },
+        {
             path: '/:catchAll(.*)',
             component: () => import('@/views/404.vue'),
             hidden: true
@@ -70,7 +86,7 @@ const router = createRouter({
 // 进度条
 NProgress.configure({ showSpinner: false });
 // 白名单
-const whiteList = ["/login"];
+const whiteList = ["/login", "/home"];
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start();

@@ -21,7 +21,7 @@ export default {
      * 登出
      */
     logout() {
-        return post("/user/logout");
+        return get("/user/logout");
     },
 
     /**
