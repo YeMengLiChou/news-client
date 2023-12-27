@@ -82,7 +82,7 @@ export default {
      * @param {string | number} commentId
      * @returns
      */
-    deleteFirstComment(commentId) {
+    deleteSecondComment(commentId) {
         return del(`/comment/second/del/${commentId}`);
     },
 

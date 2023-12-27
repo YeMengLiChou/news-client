@@ -66,7 +66,7 @@ export default {
      * @returns
      */
     getNewsById(newsId, userId) {
-        return get("/news/get/by-id", {
+        return post("/news/get/by-id", {
             newsId,
             userId,
         });
@@ -80,10 +80,10 @@ export default {
      * @returns
      */
     getNewsByPublisher(publisherId, page, size) {
-        return get("/news/get/by-publisher", {
+        return post("/news/get/by-publisher", {
             page,
             size,
-            id: publisherId,
+            param: publisherId,
         });
     },
 
@@ -95,7 +95,7 @@ export default {
      * @returns
      */
     getNewsBySectionId(sectionId, page, size) {
-        return get("/news/get/by-section", {
+        return post("/news/get/by-section", {
             page,
             size,
             id: sectionId,
@@ -109,7 +109,8 @@ export default {
      * @param {number} status
      */
     getNewsByPublishStatus(page, size, status) {
-        return get("/news/get/by-status", {
+
+        return post("/news/get/by-status", {
             page,
             size,
             status,
@@ -118,11 +119,12 @@ export default {
 
     /**
      * 模糊查询新闻
-     * @param {string} key
+     * @param {T} param
      * @param {number} page
      * @param {number} size
      * @returns
      */
+
     searchNews(param, page, size) {
         return post("/news/search", {
             param,

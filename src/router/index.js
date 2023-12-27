@@ -50,6 +50,16 @@ const router = createRouter({
             }
         },
         {
+            path:"/news-detail",
+            name:"news-detail",
+            component:() => import("@/views/news/newsdeteil.vue")
+        },
+        {
+            path:"/test",
+            name:"test",
+            component:() => import("@/views/news/apitest.vue")
+        },
+        {
             path: "/user",
             name: 'user',
             component: () => import("@/views/user/UserCenter.vue"),
@@ -100,7 +110,6 @@ const router = createRouter({
         
             ]
         },
-
         {
             path: '/:catchAll(.*)',
             component: () => import('@/views/404.vue'),
